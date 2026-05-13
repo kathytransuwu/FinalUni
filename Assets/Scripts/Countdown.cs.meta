@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0c7718c958fd0e945a95696ee320fb5e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - CountdownText: {instanceID: 0}
+  - LapTimer: {instanceID: 0}
+  - CarControls: {fileID: 3638911070570068518, guid: 0830086465bbffd4ab64ee6fc8c82d74, type: 3}
+  - CountdownAudio: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
