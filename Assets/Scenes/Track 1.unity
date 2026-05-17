@@ -1429,7 +1429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3638911070570068518, guid: 0830086465bbffd4ab64ee6fc8c82d74, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3667211753972221885, guid: 0830086465bbffd4ab64ee6fc8c82d74, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1605,26 +1605,81 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throttleWheels:
-  - {fileID: 903257342}
-  - {fileID: 903257340}
-  - {fileID: 903257338}
-  - {fileID: 903257336}
+  - WheelCollider: {fileID: 903257338}
+    Mesh: {fileID: 903257339}
+  - WheelCollider: {fileID: 903257336}
+    Mesh: {fileID: 903257337}
   steeringWheels:
-  - {fileID: 903257340}
-  - {fileID: 903257342}
+  - WheelCollider: {fileID: 903257342}
+    Mesh: {fileID: 903257343}
+  - WheelCollider: {fileID: 903257340}
+    Mesh: {fileID: 903257341}
   maxSpeed: 1000
+  maxReverseSpeed: 30
   maxTurn: 15
   minTurn: 5
   maxMotorTorque: 1500
   maxBrakeTorque: 3000
   CoM: {fileID: 903257344}
   rb: {fileID: 903257345}
+  torqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.6
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 0.8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  downforceCoefficient: 2
+  dragCoefficient: 0.5
+  minAngularDrag: 0.5
+  maxAngularDrag: 5
   driftSidewaysFriction: 0.5
   normalSidewaysFriction: 1
   driftForwardFriction: 0.8
   normalForwardFriction: 1
   currentAcceleration: 0
   accelerationRate: 10000
+  handbrakeTorque: 8000
+  absWheelRpmThreshold: 5
+  absMinSpeed: 3
+  absBrakeReduction: 0.4
+  tcsSlipRatio: 1.4
+  tcsReductionFactor: 0.3
   rayPoints:
   - {fileID: 1998029890}
   - {fileID: 827153720}
@@ -2815,26 +2870,81 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throttleWheels:
-  - {fileID: 606811511}
-  - {fileID: 787462293}
-  - {fileID: 1608352871}
-  - {fileID: 775453255}
+  - WheelCollider: {fileID: 1608352871}
+    Mesh: {fileID: 619651744}
+  - WheelCollider: {fileID: 775453255}
+    Mesh: {fileID: 2069504928}
   steeringWheels:
-  - {fileID: 787462293}
-  - {fileID: 606811511}
+  - WheelCollider: {fileID: 606811511}
+    Mesh: {fileID: 912620706}
+  - WheelCollider: {fileID: 787462293}
+    Mesh: {fileID: 205315715}
   maxSpeed: 30
+  maxReverseSpeed: 30
   maxTurn: 30
   minTurn: 5
   maxMotorTorque: 1000
   maxBrakeTorque: 2000
   CoM: {fileID: 1078512462}
   rb: {fileID: 1740484224}
+  torqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.6
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 0.8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  downforceCoefficient: 2
+  dragCoefficient: 0.5
+  minAngularDrag: 0.5
+  maxAngularDrag: 5
   driftSidewaysFriction: 0.5
   normalSidewaysFriction: 1.5
   driftForwardFriction: 0.4
   normalForwardFriction: 1.5
   currentAcceleration: 0
   accelerationRate: 300
+  handbrakeTorque: 8000
+  absWheelRpmThreshold: 5
+  absMinSpeed: 3
+  absBrakeReduction: 0.4
+  tcsSlipRatio: 1.4
+  tcsReductionFactor: 0.3
   rayPoints:
   - {fileID: 1653753763}
   - {fileID: 1632343223}
@@ -3567,7 +3677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3638911070570068518, guid: 0830086465bbffd4ab64ee6fc8c82d74, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3667211753972221885, guid: 0830086465bbffd4ab64ee6fc8c82d74, type: 3}
       propertyPath: m_LocalPosition.x
