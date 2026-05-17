@@ -1,13 +1,16 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using Unity.VisualScripting;
 
 public class CarDriverAI : MonoBehaviour
 {
-    [SerializeField] private Transform targetPositionTransform;
+    [SerializeField] private WaypointPath waypointPath;
+   [SerializeField] private float waypointRadius = 3f; // The radius within which the AI considers it has reached a waypoint
 
     private AIController controller;
-    private Vector3 targetPosition;
+    private int currentWaypointIndex = 0;
 
     private void Awake()
     {
@@ -16,47 +19,42 @@ public class CarDriverAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Sets the position of the target to the position of the targetPositionTransform, which is a gameobject that I can move around to make the AI drive towards it.
-        SetTargetPosition(targetPositionTransform.position);
-        //Speed and turn of the AI car
-        float forwardAmount = 0f;
-        float turnAmount = 0f;
-
-        //Checks the position of the targetTest object compared to the position of the car. If its positive the target is in front of the car, if its negative its behind the car.
-        Vector3 dirToMovePosition = (targetPosition - transform.position).normalized;
-        float dot = Vector3.Dot(transform.forward, dirToMovePosition);
-
-        if (dot > 0)
+        if(waypointPath == null)
         {
-            forwardAmount = 1f; // Move forward
-        }
-        else
-        {
-            forwardAmount = -1f; // Move backward
+            return;
         }
 
-        Debug.Log(dot);
+        Transform target = waypointPath.getWaypoints(currentWaypointIndex); //Set the target to the current waypoint
 
-        float angleToTarget = Vector3.SignedAngle(transform.forward, dirToMovePosition, Vector3.up);
+        float distanceToWaypoint = Vector3.Distance(transform.position, target.position);
 
-        if (angleToTarget > 0)
+        if (distanceToWaypoint < waypointRadius)
         {
-            turnAmount = 1f; // Turn right
+            currentWaypointIndex++;
+            if (currentWaypointIndex >= waypointPath.length)
+            {
+                currentWaypointIndex = 0; // Loop back to the first waypoint
+            }
         }
-        else
-        {
-            turnAmount = -1f; // Turn left
-        }
+        Vector3 dirToTarget = (target.position - transform.position).normalized;
+        float checkToTarget = Vector3.Dot(transform.forward, dirToTarget);
+        float forwardAmount = checkToTarget > 0 ? 1f : -1f; // If the target is in front of the AI, go forward, otherwise go backward
 
-        
-        //AI logic for controlling the car. 
+        float angleToTarget = Vector3.SignedAngle(transform.forward, dirToTarget, Vector3.up);
+        float turnAmount = Mathf.Clamp(angleToTarget / 45f, -1f, 1f); // Normalize the angle to a value between -1 and 1 for steering
+
         controller.SetInputs(forwardAmount, turnAmount);
-
-        Debug.Log($"Throttle: {controller.throttle}, Steering: {controller.steering}");
     }
-    public void SetTargetPosition(Vector3 targetPosition)
+    private void OnDrawGizmos()
     {
-        this.targetPosition = targetPosition;
+        if (waypointPath == null)
+        {
+            return;
+        }
+        // Draw a sphere at the current waypoint for visualization
+        Transform target = waypointPath.getWaypoints(currentWaypointIndex);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(target.position, waypointRadius);
     }
-
 }
+
