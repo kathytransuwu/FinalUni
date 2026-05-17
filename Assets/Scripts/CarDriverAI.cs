@@ -8,13 +8,24 @@ public class CarDriverAI : MonoBehaviour
 {
     [SerializeField] private WaypointPath waypointPath;
    [SerializeField] private float waypointRadius = 3f; // The radius within which the AI considers it has reached a waypoint
-
     private AIController controller;
+    private Rigidbody rb;
+
     private int currentWaypointIndex = 0;
+
+    [Header("Stuck failsafe")]
+    [SerializeField] private float stuckTimeLimit = 5f; // Time in seconds before the AI considers itself stuck
+    [SerializeField] private float stuckSpeedThreshold = 0.5f; //Below this speed, the AI considers itself stuck
+    [SerializeField] private float recoveryTime = 2f; // Time in seconds to brake before retrying
+
+    private float stuckTimer = 0f;
+    private bool isRecovering = false;
+    private float recoveryTimer = 0f;
 
     private void Awake()
     {
         controller = GetComponent<AIController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -22,6 +33,40 @@ public class CarDriverAI : MonoBehaviour
         if(waypointPath == null)
         {
             return;
+        }
+
+        if (!isRecovering)
+        {
+            //If barely moving, start the stuck timer
+            if (rb.linearVelocity.magnitude < stuckSpeedThreshold)
+            {
+                stuckTimer += Time.fixedDeltaTime;
+            }
+            else
+            {
+                stuckTimer = 0f; // Reset the timer if the AI is moving fast enough
+            }
+
+            if (stuckTimer >= stuckTimeLimit)
+            {
+                isRecovering = true;
+                recoveryTimer = recoveryTime; // Start the recovery timer
+                stuckTimer = 0f; // Reset the stuck timer
+            }
+        }
+
+        //If in recovery mode, brake for the recovery time before trying to move again
+        if (isRecovering)
+        {
+            recoveryTimer -= Time.fixedDeltaTime;
+            controller.SetInputs(0f, 0f); // Brake, the carcontroller script will apply the brake logic to the car 
+
+            if(recoveryTimer <= 0f && rb.linearVelocity.magnitude < 0.5f)
+            {
+                isRecovering = false; // End recovery mode and try to move again
+                currentWaypointIndex = (currentWaypointIndex + 1) % waypointPath.length; // Move to the next waypoint to try a different path
+            }
+            return; // Skip the rest of the logic while recovering
         }
 
         Transform target = waypointPath.getWaypoints(currentWaypointIndex); //Set the target to the current waypoint

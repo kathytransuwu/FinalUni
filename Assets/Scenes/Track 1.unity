@@ -2057,7 +2057,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointPath: {fileID: 711047763}
-  waypointRadius: 3
+  waypointRadius: 15
+  stuckTimeLimit: 5
+  stuckSpeedThreshold: 0.5
+  recoveryTime: 2
 --- !u!1 &910667371
 GameObject:
   m_ObjectHideFlags: 0
