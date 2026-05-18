@@ -1,9 +1,21 @@
 fileFormatVersion: 2
 guid: 3131eb239467945468ca6245f35c2ba1
+AssetOrigin:
+  serializedVersion: 1
+  productId: 291522
+  packageName: Simple Retro Car
+  packageVersion: 1.0
+  assetPath: Assets/Polyeler/Simple Retro Car/Meshes/V1.fbx
+  uploadId: 680681
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 
+    second: {fileID: 2100000, guid: bab821880557a6440bf93941ccfaa3a6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -14,11 +26,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: illumination
     second: {fileID: 2100000, guid: dcc4d1446ac4b6247b4efd43603c13f6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
-    second: {fileID: 2100000, guid: bab821880557a6440bf93941ccfaa3a6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -31,8 +38,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -63,7 +68,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -76,8 +81,8 @@ ModelImporter:
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
-    secondaryUVHardAngle: 88
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 48
     secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
@@ -122,10 +127,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 291522
-  packageName: Simple Retro Car
-  packageVersion: 1.0
-  assetPath: Assets/Polyeler/Simple Retro Car/Meshes/V1.fbx
-  uploadId: 680681

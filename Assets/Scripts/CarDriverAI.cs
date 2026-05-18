@@ -18,6 +18,10 @@ public class CarDriverAI : MonoBehaviour
     [SerializeField] private float stuckSpeedThreshold = 0.5f; //Below this speed, the AI considers itself stuck
     [SerializeField] private float recoveryTime = 2f; // Time in seconds to brake before retrying
 
+    [Header("Waypoint time limit")]
+    [SerializeField] private float waypointTimeLimit = 10f; // Time in seconds before the AI considers itself stuck at a waypoint
+    private float waypointTimer = 0f; // Timer to track how long the AI has been trying to reach the current waypoint
+
     private float stuckTimer = 0f;
     private bool isRecovering = false;
     private float recoveryTimer = 0f;
@@ -37,6 +41,15 @@ public class CarDriverAI : MonoBehaviour
 
         if (!isRecovering)
         {
+            //Count up time whilst trying to hit waypoint, if it takes too long, start the recovery process
+            waypointTimer += Time.fixedDeltaTime;
+
+            if(waypointTimer >= waypointTimeLimit)
+            {
+                isRecovering = true;
+                recoveryTimer = recoveryTime; // Start the recovery timer
+                waypointTimer = 0f; // Reset the waypoint timer
+            }
             //If barely moving, start the stuck timer
             if (rb.linearVelocity.magnitude < stuckSpeedThreshold)
             {
@@ -76,6 +89,7 @@ public class CarDriverAI : MonoBehaviour
         if (distanceToWaypoint < waypointRadius)
         {
             currentWaypointIndex++;
+            waypointTimer = 0f; // Reset the waypoint timer when a waypoint is reached
             if (currentWaypointIndex >= waypointPath.length)
             {
                 currentWaypointIndex = 0; // Loop back to the first waypoint

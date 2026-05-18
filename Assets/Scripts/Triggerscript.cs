@@ -6,10 +6,13 @@ public class Triggerscript : MonoBehaviour
     public GameObject LapComplete;
     public GameObject HalfLapComplete;
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        LapComplete.SetActive(true);
-        HalfLapComplete.SetActive(false);
+        if (other.CompareTag("Player"))
+        {
+            LapComplete.SetActive(true);
+            HalfLapComplete.SetActive(false);
+        }
     }
 
 }
