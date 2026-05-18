@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 023808db2bfa00d44929aa2176d29c76, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 1933287774}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -92,7 +92,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1e8b7c986352b8e44a33ef3f399a8be9, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1425,7 +1425,7 @@ Transform:
   m_GameObject: {fileID: 1933287772}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 1.07, y: 3, z: 0.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2001,7 +2001,6 @@ Transform:
   - {fileID: 1943625123}
   - {fileID: 1943625121}
   - {fileID: 1943625135}
-  - {fileID: 3857031427433509768}
   m_Father: {fileID: 1488849005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1943625193
@@ -2575,7 +2574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1943978488
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4897,8 +4896,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3882773967475789331}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4907,7 +4906,7 @@ Transform:
   - {fileID: 7441825409963570924}
   - {fileID: 6350005720241635510}
   - {fileID: 245818835}
-  m_Father: {fileID: 1943625175}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3882773967475789331
 GameObject:
@@ -4962,27 +4961,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccbdf58cf2300984a91c681e043a4ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 3882773967475789334}
   throttleWheels:
-  - {fileID: 2551545461508896265}
-  - {fileID: 7407701938746364606}
-  - {fileID: 4026203614840818617}
-  - {fileID: 5640005967937004707}
+  - WheelCollider: {fileID: 0}
+    Mesh: {fileID: 0}
+  - WheelCollider: {fileID: 0}
+    Mesh: {fileID: 0}
+  - WheelCollider: {fileID: 0}
+    Mesh: {fileID: 0}
+  - WheelCollider: {fileID: 0}
+    Mesh: {fileID: 0}
   steeringWheels:
-  - {fileID: 7407701938746364606}
-  - {fileID: 2551545461508896265}
+  - WheelCollider: {fileID: 0}
+    Mesh: {fileID: 0}
+  - WheelCollider: {fileID: 0}
+    Mesh: {fileID: 0}
   maxSpeed: 1000
-  motorTorque: 1500
+  maxReverseSpeed: 30
   maxTurn: 15
+  minTurn: 5
+  maxMotorTorque: 1500
+  maxBrakeTorque: 3000
   CoM: {fileID: 6350005720241635510}
   rb: {fileID: 1292887180454778848}
+  torqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.6
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 0.8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  downforceCoefficient: 2
+  dragCoefficient: 0.5
+  minAngularDrag: 0.5
+  maxAngularDrag: 5
   driftSidewaysFriction: 0.2
   normalSidewaysFriction: 1
   driftForwardFriction: 0.6
   normalForwardFriction: 1
-  driftTransitionSpeed: 5
   currentAcceleration: 0
   accelerationRate: 0.2
+  handbrakeTorque: 8000
+  absWheelRpmThreshold: 5
+  absMinSpeed: 3
+  absBrakeReduction: 0.4
+  tcsSlipRatio: 1.4
+  tcsReductionFactor: 0.3
   rayPoints:
   - {fileID: 1466306557}
   - {fileID: 2089956254}
@@ -5005,9 +5063,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ec21b21f0ce634281fece202359e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throttle: 0
-  steering: 0
-  isDrifting: 0
 --- !u!4 &3914679457816794407
 Transform:
   m_ObjectHideFlags: 0
@@ -5551,3 +5606,4 @@ SceneRoots:
   - {fileID: 1033267496}
   - {fileID: 1488849005}
   - {fileID: 1774886974}
+  - {fileID: 3857031427433509768}
