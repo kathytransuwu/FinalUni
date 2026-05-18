@@ -8,11 +8,9 @@ public class Triggerscript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            LapComplete.SetActive(true);
-            HalfLapComplete.SetActive(false);
-        }
+        LapComplete.SetActive(true);
+        HalfLapComplete.SetActive(false);
+        
     }
 
 }
